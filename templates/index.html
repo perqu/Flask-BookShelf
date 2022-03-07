@@ -1,0 +1,343 @@
+{% extends 'base.html' %} {% include 'header.html' %} {% block title %} Home {%
+endblock %} {% block body %}
+
+<article>
+  <div class="main-page">
+    <h2>Manage Books</h2>
+    <nav>
+      <input
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Search..."
+        onkeyup="filteringAll()"
+      />
+      <input
+        type="text"
+        placeholder="From..."
+        class="dates"
+        id="start"
+        onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}"
+        onchange="filteringAll()"
+      />
+      <input
+        type="text"
+        placeholder="To..."
+        class="dates"
+        id="end"
+        onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}"
+        onchange="filteringAll()"
+      />
+    </nav>
+    <button
+      type="button"
+      class="btn-add"
+      data-toggle="modal"
+      data-target="#mymodal"
+    >
+      Add new
+    </button>
+  </div>
+
+  {% with messages = get_flashed_messages() %} {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %} {% endwith %}
+  <table id="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Authors</th>
+        <th>Published Date</th>
+        <th>ISBN10</th>
+        <th>ISBN13</th>
+        <th>Page Count</th>
+        <th>Preview Link</th>
+        <th>Language</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for book in books %}
+      <tr>
+        <td>{{book.id}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.authors}}</td>
+        <td>{{book.published_date}}</td>
+        <td>{{book.ISBN10}}</td>
+        <td>{{book.ISBN13}}</td>
+        <td>{{book.page_count}}</td>
+        <td>{{book.preview_link}}</td>
+        <td>{{book.language}}</td>
+
+        <td class="btn-actions">
+          <a
+            href="/update/{{book.id}}"
+            class="btn-edit"
+            data-toggle="modal"
+            data-target="#modaledit{{book.id}}"
+            >Edit</a
+          >
+          <a
+            href="/delete/{{book.id}}"
+            class="btn-delete"
+            onclick="return confirm('Are You Sure To Delete ?')"
+            >Delete</a
+          >
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- Modal Edit Book -->
+    <div id="modaledit{{book.id}}" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit Information</h4>
+          </div>
+
+          <div class="modal-body">
+            <form action="{{url_for('update')}}" method="POST">
+              <div class="form-group">
+                <label>Title:</label>
+                <input type="hidden" name="id" value="{{book.id}}" />
+                <input
+                  type="text"
+                  class="form-control"
+                  name="title"
+                  value="{{book.title}}"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Authors:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="authors"
+                  value="{{book.authors}}"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Published Date:</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="published_date"
+                  value="{{book.pusblished_date}}"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>ISBN10:</label>
+                <input
+                  type="text"
+                  pattern="\d*"
+                  class="form-control"
+                  name="ISBN10"
+                  value="{{book.ISBN10}}"
+                  minlength="10"
+                  maxlength="10"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>ISBN13:</label>
+                <input
+                  type="text"
+                  pattern="\d*"
+                  class="form-control"
+                  name="ISBN13"
+                  value="{{book.ISBN13}}"
+                  minlength="13"
+                  maxlength="13"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Page Count:</label>
+                <input
+                  type="text"
+                  pattern="\d*"
+                  class="form-control"
+                  name="page_count"
+                  value="{{book.page_count}}"
+                  minlength="1"
+                  maxlength="4"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Preview Link:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="preview_link"
+                  value="{{book.preview_link}}"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Language:</label>
+                <input
+                  type="text"
+                  pattern="[A-Za-z].{1,3}"
+                  title="Two/Three letter language code"
+                  class="form-control"
+                  name="language"
+                  value="{{book.language}}"
+                  maxlength="3"
+                  required="1"
+                />
+              </div>
+
+              <div class="form-group">
+                <button class="btn-edit" type="submit">Update</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-close" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </table>
+</article>
+
+<!-- Modal Add Book -->
+
+<div id="mymodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Book</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('insert')}}" method="POST">
+          <div class="form-group">
+            <label>Title:</label>
+            <input type="text" class="form-control" name="title" required="1" />
+          </div>
+
+          <div class="form-group">
+            <label>Authors:</label>
+            <input
+              type="text"
+              class="form-control"
+              name="authors"
+              required="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Published Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              name="published_date"
+              required="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>ISBN10:</label>
+            <input
+              type="text"
+              pattern="\d*"
+              class="form-control"
+              name="ISBN10"
+              minlength="10"
+              maxlength="10"
+              required="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>ISBN13:</label>
+            <input
+              type="text"
+              pattern="\d*"
+              class="form-control"
+              name="ISBN13"
+              minlength="13"
+              maxlength="13"
+              required="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Page Count:</label>
+            <input
+              type="text"
+              pattern="\d*"
+              class="form-control"
+              name="page_count"
+              required="1"
+              minlength="1"
+              maxlength="4"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Preview Link:</label>
+            <input
+              type="text"
+              class="form-control"
+              name="preview_link"
+              required="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Language:</label>
+            <input
+              type="text"
+              pattern="[A-Za-z].{1,3}"
+              title="Two/Three letter language code"
+              class="form-control"
+              name="language"
+              maxlength="3"
+              required="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <button class="btn-add-smaller" type="submit">Add Book</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-close" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="static/js/filtering-all.js"></script>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %} BookShelf {% endblock %} {% block
+body %}
+
+<header>
+  <div class="page-name">
+    <h1>Bookshelf</h1>
+  </div>
+  <div class="links">
+    <a href="{{url_for('Index')}}" class="link">manage</a>
+    <a href="{{url_for('google')}}" class="link">import</a>
+  </div>
+</header>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% include 'header.html' %} {% block title %} Home {%
+endblock %} {% block body %}
+
+<article>
+  <div class="main-page">
+    <h2>Import from Google</h2>
+    <nav>
+      <form action="" method="">
+        <div class="searching-box">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Type title, author, etc..."
+              name="search"
+              {%
+              if
+              search
+              %}value="{{search}}"
+              {%
+              endif
+              %}
+              required="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <button class="btn-search" type="submit">Search</button>
+          </div>
+        </div>
+      </form>
+    </nav>
+  </div>
+  <section>
+    {% with messages = get_flashed_messages() %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Holy guacamole!</strong> {{message}}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} {% endwith %}
+    <table id="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Authors</th>
+          <th>Published Date</th>
+          <th>ISBN10</th>
+          <th>ISBN13</th>
+          <th>Page Count</th>
+          <th>Preview Link</th>
+          <th>Language</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% if books %} {% for book in books %}
+        <tr>
+          <td>{{book['id']}}</td>
+          <td>{{book['title']}}</td>
+          <td>{{book['authors']}}</td>
+          <td>{{book['published_date']}}</td>
+          <td>{{book['ISBN10']}}</td>
+          <td>{{book['ISBN13']}}</td>
+          <td>{{book['page_count']}}</td>
+          <td>{{book['preview_link']}}</td>
+          <td>{{book['language']}}</td>
+
+          <td class="btn-actions">
+            <a
+              href="/import/?title={{book['title']}}&authors={{book['authors']}}&published_date={{book['published_date']}}&ISBN10={{book['ISBN10']}}&ISBN13={{book['ISBN13']}}&page_count={{book['page_count']}}&preview_link={{book['preview_link']}}&language={{book['language']}}&search={{search}}"
+              class="btn-import"
+              onclick="return confirm('Import to BookShelf?')"
+              >+</a
+            >
+          </td>
+        </tr>
+        {% endfor %} {% endif %}
+      </tbody>
+    </table>
+  </section>
+</article>
+{% endblock %}

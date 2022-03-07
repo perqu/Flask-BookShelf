@@ -1,0 +1,254 @@
+body {
+  background-color: rgb(255, 255, 255);
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 15px 1px rgb(192, 192, 192);
+  font-family: "Roboto", sans-serif;
+}
+
+.links {
+  margin-left: 20px;
+}
+
+.link {
+  color: rgb(0, 0, 0);
+}
+
+.link:last-child {
+  margin-left: 15px;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+nav {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+
+article {
+  padding: 20px;
+}
+
+nav {
+  margin-left: 400px;
+}
+
+nav input[type="text"],
+nav input[type="date"] {
+  border: none;
+  border-bottom: 1px solid rgb(146, 146, 146);
+  outline: none;
+  letter-spacing: 2px;
+}
+
+#search {
+  width: 300px;
+}
+
+header input[type="date"],
+.dates {
+  width: 25%;
+}
+
+h1 {
+  padding-left: 20px;
+  letter-spacing: 4px;
+}
+
+.main-page {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+}
+
+.btn-add,
+.btn-add-smaller {
+  box-shadow: 0 2px 15px 1px rgb(190, 190, 190);
+  background-color: rgba(191, 218, 175, 0.582);
+  border: 1px solid rgba(191, 218, 175, 0.582);
+  border-radius: 20px;
+  color: rgb(98, 143, 81);
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: all 0.5s;
+}
+
+.btn-add {
+  width: 200px;
+  height: 50px;
+}
+
+.btn-add:hover,
+.btn-add-smaller:hover,
+.btn-close:hover {
+  opacity: 0.6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px rgb(225, 229, 238);
+  text-align: center;
+  overflow: hidden;
+}
+
+thead {
+  width: 90%;
+  box-shadow: 0 5px 10px rgb(225, 229, 238);
+}
+
+th {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+td,
+th {
+  padding: 0.5rem;
+}
+
+td {
+  height: 80px;
+}
+
+tbody {
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  background-color: rgba(248, 248, 248, 0.286);
+}
+
+tr:nth-child(even) {
+  background-color: rgb(244, 246, 251);
+}
+
+.btn-actions {
+  width: 280px;
+}
+
+.btn-edit,
+.btn-delete {
+  appearance: button;
+  cursor: default;
+  width: 120px;
+  height: 40px;
+  color: black;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px 1px rgb(190, 190, 190);
+  letter-spacing: 1px;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.btn-edit,
+.btn-edit:hover {
+  float: left;
+  margin-right: 20px;
+  background-color: rgba(250, 227, 153, 0.514);
+  color: rgb(166, 139, 0);
+  border: 1px solid rgb(250, 227, 153);
+}
+
+.btn-delete,
+.btn-delete:hover {
+  background-color: rgba(255, 163, 171, 0.603);
+  color: rgb(198, 40, 40);
+  margin-left: 30px;
+  border: 1px solid rgba(255, 163, 171, 0.603);
+}
+
+.modal {
+  font-family: "Roboto", sans-serif;
+}
+
+.form-control {
+  border: none;
+  border-bottom: 1px solid rgb(146, 146, 146);
+  outline: none;
+}
+
+label {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.btn-add-smaller {
+  width: 150px;
+  height: 40px;
+}
+
+.btn-close {
+  width: 120px;
+  height: 40px;
+  color: rgb(0, 0, 0);
+  border-radius: 15px;
+  box-shadow: 0 2px 5px 1px rgb(190, 190, 190);
+  background-color: rgb(238, 238, 238);
+  border: 1px solid rgb(238, 238, 238);
+  letter-spacing: 1px;
+  transition: all 0.5s;
+}
+
+.searching-box {
+  display: flex;
+}
+
+.btn-search {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  background-color: rgba(226, 226, 226, 0.548);
+  border: 1px solid rgba(226, 226, 226, 0.548);
+  box-shadow: 0 2px 5px 1px rgba(131, 131, 131, 0.63);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 1px;
+  transition: all 0.5s;
+}
+
+.btn-search:hover {
+  opacity: 0.6;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.searching-box .form-control {
+  width: 700px;
+  border: none;
+  border-bottom: 1px solid rgb(146, 146, 146);
+  outline: none;
+  letter-spacing: 2px;
+}
+
+.btn-import {
+  font-size: 25px;
+  color: rgb(0, 0, 0);
+}
+
+.btn-import:hover {
+  text-decoration: none;
+}
