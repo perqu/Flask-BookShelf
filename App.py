@@ -4,7 +4,7 @@ from flask_restful import Api, Resource, fields, marshal_with
 import GoogleAPI
 
 app = Flask(__name__)
-app.secret_key = "Secret Key"  # ogarnac co to i po co
+app.secret_key = "615479af3de3482bdb6ed6c5f8f15457"
 api = Api(app)
 
 # SQLAlchemy Database Configuration With MySQL
